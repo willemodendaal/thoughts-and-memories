@@ -1,16 +1,23 @@
 var express = require('express'),
     mongoose = require('mongoose'),
-    Transaction = require('./models/transactionModel'),
     bodyParser = require('body-parser'),
-    TxnRouter = require('./routes/txnRoutes');
+    ThoughtRouter = require('./src/routes/thoughtRouter'),
+    MemoryRouter = require('./src/routes/memoryRouter');
 
-var db = mongoose.connect('mongodb://localhost/budget');
 var app = express();
-var port = process.env.PORT || 3001;
+var port = process.env.PORT || 3311;
 
-app.use(bodyParser.json()); //Use middleware. Convert json in body to req.body.
-app.use(bodyParser.urlencoded({extended:true}));
-app.use('/api/transactions', TxnRouter());
+//Convert json in body to request.body
+app.use(bodyParser.json());
+
+//Middleware that parses urlEncoded bodies. Returned as key/value pairs on the request.body
+//  extended:false ensures that only strings or arrays can be passed.
+app.use(bodyParser.urlencoded({extended:false}));
+
+
+//Set routes.
+app.use('/api/thoughts', ThoughtRouter());
+app.use('/api/memories', MemoryRouter());
 
 app.listen(port, function () {
     console.log('API listening on port ' + port);
