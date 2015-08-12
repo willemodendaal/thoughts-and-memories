@@ -6,6 +6,8 @@ var routes = function () {
     router.route('/')
         .post(function (req, res) {
             var thought = new Thought(req.body);
+            thought.createDate = new Date();
+            thought.updateDate = new Date();
             thought.save();
             res.status(201).send(thought); //Status 201 = Created
 

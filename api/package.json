@@ -8,7 +8,7 @@
     "start": "node server.js"
   },
   "author": "",
-  "license": "ISC",
+  "license": "LGPLv3",
   "dependencies": {
     "body-parser": "^1.13.3",
     "express": "^4.13.3",

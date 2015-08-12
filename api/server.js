@@ -1,9 +1,10 @@
 var express = require('express'),
     mongoose = require('mongoose'),
     bodyParser = require('body-parser'),
-    ThoughtRouter = require('./src/routes/thoughtRouter'),
-    MemoryRouter = require('./src/routes/memoryRouter');
+    ThoughtRouter = require('./src/routes/thoughtRouter');
+    //MemoryRouter = require('./src/routes/memoryRouter');
 
+var db = mongoose.connect('mongodb://localhost/thoughts_and_memories');
 var app = express();
 var port = process.env.PORT || 3311;
 
@@ -17,7 +18,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 
 //Set routes.
 app.use('/api/thoughts', ThoughtRouter());
-app.use('/api/memories', MemoryRouter());
+//app.use('/api/memories', MemoryRouter());
 
 app.listen(port, function () {
     console.log('API listening on port ' + port);
